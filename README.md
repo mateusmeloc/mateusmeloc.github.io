@@ -1,6 +1,13 @@
 # mateusmeloc.github.io
 
-Site pessoal, publicado pelo GitHub Pages.
+Site pessoal, publicado pelo GitHub Pages em <https://mateusmeloc.github.io/>.
+
+## `/` (raiz)
+
+`index.html` é a página inicial: um arquivo só, em inglês, sem JavaScript e sem
+requisições externas, com tema claro e escuro. Apresenta os projetos públicos
+(`mcp-erp-server`, `whatsapp-receipts-agent`, o site da clínica e o app de listas).
+Para mudar, edite o arquivo direto e publique.
 
 ## `/listas/`
 

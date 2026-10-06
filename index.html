@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mateus Melo — AI agents, MCP servers, business systems</title>
+<meta name="description" content="Self-taught software engineer building AI agents and the systems around them: MCP servers, WhatsApp assistants and the ERPs they connect to. Running in production for a real business.">
+<link rel="canonical" href="https://mateusmeloc.github.io/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mateus Melo — AI agents, MCP servers, business systems">
+<meta property="og:description" content="MCP servers, WhatsApp agents and ERP integrations, built with human approval for anything irreversible. Open-source reference builds with tests and CI.">
+<meta property="og:url" content="https://mateusmeloc.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Cpath d='M16 46V18h8l8 14 8-14h8v28h-7V30l-9 15h-0l-9-15v16z' fill='white'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --surface-2:#eef1f5; --text:#0f172a; --muted:#475569;
+  --line:#dde3ea; --accent:#0f766e; --accent-ink:#ffffff; --accent-soft:#d9f2ee;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.05);
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1220; --surface:#111a2e; --surface-2:#16213a; --text:#e8edf5; --muted:#a3b0c4;
+    --line:#223050; --accent:#2dd4bf; --accent-ink:#06201d; --accent-soft:#123a3a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 14px;border-radius:8px;z-index:10}
+.skip:focus{left:8px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0}
+.brand{font-weight:700;letter-spacing:-.01em;color:var(--text);text-decoration:none}
+nav.links{display:flex;gap:6px;flex-wrap:wrap}
+nav.links a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:.95rem}
+nav.links a:hover{background:var(--surface-2);color:var(--text)}
+
+.hero{padding:44px 0 36px}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:5px 11px;border-radius:999px}
+h1{font-size:clamp(2rem,5.2vw,3.25rem);line-height:1.1;letter-spacing:-.025em;margin:18px 0 16px;max-width:18em}
+.lead{font-size:clamp(1.05rem,2.2vw,1.25rem);color:var(--muted);max-width:40em;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--line);color:var(--text);background:var(--surface)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.07)}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0 0;padding:0;list-style:none}
+.facts li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.facts b{display:block;font-size:1.6rem;letter-spacing:-.02em;line-height:1.2}
+.facts span{color:var(--muted);font-size:.92rem}
+
+section{padding:44px 0 8px}
+h2{font-size:1.5rem;letter-spacing:-.015em;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;max-width:44em}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.card h3{margin:0;font-size:1.1rem;letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:.97rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;padding:0;list-style:none}
+.tags li{font-size:.76rem;font-weight:600;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);padding:2px 9px;border-radius:999px}
+.card .more{margin-top:auto;padding-top:6px;font-weight:600;font-size:.95rem}
+.badge{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:2px 8px}
+.badge.open{color:var(--accent);background:var(--accent-soft)}
+.badge.private{color:var(--muted);background:var(--surface-2);border:1px solid var(--line)}
+
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;list-style:none;padding:0;margin:0}
+.principles li{border-left:3px solid var(--accent);padding:2px 0 2px 16px}
+.principles b{display:block;margin-bottom:2px}
+.principles span{color:var(--muted);font-size:.97rem}
+
+footer{margin-top:56px;border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:.93rem;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:720px){
+  .grid,.principles{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr}
+  .hero{padding-top:28px}
+  header.top{padding:14px 0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">Mateus Melo</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#approach">Approach</a>
+      <a href="https://github.com/mateusmeloc" rel="me">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="hero" id="top">
+      <span class="eyebrow">Software engineer · AI agents</span>
+      <h1>I build AI agents, and the systems they can safely work with.</h1>
+      <p class="lead">MCP servers, WhatsApp assistants and the ERPs behind them. Self-taught, and my own code runs a real business every day. Everything irreversible goes through a human first.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/mateusmeloc">See my GitHub</a>
+        <a class="btn" href="#work">Selected work</a>
+      </div>
+      <ul class="facts" aria-label="At a glance">
+        <li><b>50+</b><span>tools in the MCP server I run in production</span></li>
+        <li><b>1,000+</b><span>commits in one production multi-tenant ERP</span></li>
+        <li><b>2</b><span>open reference builds with tests and CI</span></li>
+      </ul>
+    </div>
+
+    <section id="work" aria-labelledby="work-h">
+      <h2 id="work-h">Selected work</h2>
+      <p class="sub">Two public, runnable reference builds, based on patterns I use in production. They run on synthetic data, so you can clone them and try them in a minute.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="badge open">Open source</span>
+          <h3>mcp-erp-server</h3>
+          <p>A remote MCP server that lets an assistant work with a business ERP without being handed the keys: OAuth 2.1 with PKCE and dynamic client registration, tools that exist only for the roles allowed to use them, and writes that are previewed first and confirmed with a single-use token.</p>
+          <ul class="tags"><li>TypeScript</li><li>MCP</li><li>OAuth 2.1</li><li>40 tests</li></ul>
+          <a class="more" href="https://github.com/mateusmeloc/mcp-erp-server">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <span class="badge open">Open source</span>
+          <h3>whatsapp-receipts-agent</h3>
+          <p>A WhatsApp agent for a back office. A vision model reads a receipt photo, plain code matches it to open bills, and nothing is recorded until an owner replies YES. Signed webhooks, an allow-list, idempotency and a real transcript in the README.</p>
+          <ul class="tags"><li>TypeScript</li><li>WhatsApp Cloud API</li><li>Vision LLM</li><li>353 tests</li></ul>
+          <a class="more" href="https://github.com/mateusmeloc/whatsapp-receipts-agent">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <span class="badge private">In production · private</span>
+          <h3>Multi-tenant ERP</h3>
+          <p>Financial management, scheduling and a commercial CRM funnel with AI-generated insights, used daily by a real business. Tenant-guarded routes, automated tests and CI. Private, and I am happy to walk through it live.</p>
+          <ul class="tags"><li>Next.js</li><li>TypeScript</li><li>Supabase / PostgreSQL</li></ul>
+        </article>
+        <article class="card">
+          <span class="badge private">In production · private</span>
+          <h3>MCP server and WhatsApp agent for that ERP</h3>
+          <p>The production counterparts of the two open builds above: an MCP server with 50+ tools over live business data, and an always-on operational agent that reconciles receipts against open invoices and sends a daily report, with human approval for anything irreversible. Both deployed on Railway.</p>
+          <ul class="tags"><li>Node.js</li><li>MCP</li><li>Railway</li></ul>
+        </article>
+        <article class="card">
+          <span class="badge open">Live · public</span>
+          <h3>A clinic's website</h3>
+          <p>A one-page site with no framework: one generated HTML file of about 115 KB, responsive images, local-SEO structured data and WhatsApp booking buttons, hosted free on GitHub Pages. The README explains the build and how patient photos are kept out of the repository.</p>
+          <ul class="tags"><li>HTML / CSS</li><li>Python build</li><li>SEO</li></ul>
+          <a class="more" href="https://www.espacoodontologicoserra.com.br">Visit the site →</a>
+        </article>
+        <article class="card">
+          <span class="badge open">Live · public</span>
+          <h3>Shopping lists app</h3>
+          <p>A small app, in Portuguese, that the clinic's management uses to build the monthly shopping list and send it over WhatsApp. This public copy has the photo-reading feature switched off, because that needs a private server.</p>
+          <ul class="tags"><li>React</li><li>Node.js</li><li>Single-file build</li></ul>
+          <a class="more" href="/listas/">Open the demo →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="approach" aria-labelledby="approach-h">
+      <h2 id="approach-h">How I build</h2>
+      <p class="sub">The same few rules show up in every project above. They are in the code and the tests, not just in the README.</p>
+      <ul class="principles">
+        <li><b>The model proposes, a person approves.</b><span>Models read, summarize and suggest. Anything that writes to the books or the calendar needs an explicit yes, bound to exactly what was shown.</span></li>
+        <li><b>Least privilege by construction.</b><span>Roles decide which tools exist for a caller, so a tool that was never registered cannot be called by mistake, or by a model that was talked into it.</span></li>
+        <li><b>Tested without the network.</b><span>Dependencies are injectable, so tests run with no secrets and no live services, including hostile inputs such as forged signatures and prompt injection.</span></li>
+        <li><b>Honest limits.</b><span>Each public repo ends with a list of what it does not do, such as single-instance state and unmeasured model accuracy, so nobody has to find out the hard way.</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>Mateus Melo · Brazil (UTC−3) · open to remote work</span>
+    <span><a href="https://github.com/mateusmeloc" rel="me">github.com/mateusmeloc</a></span>
+  </footer>
+</div>
+</body>
+</html>
